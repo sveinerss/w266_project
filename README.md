@@ -1,7 +1,7 @@
 # w266_project
 
 ## Milestone
-### Draft/ Outline must be submitted by 3/18.
+### Draft/Outline must be submitted by 3/18 (Might Just be Mark's Optional. When does your section need it?)
 
 
 ## Project Goal
