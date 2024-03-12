@@ -1,0 +1,20 @@
+Generate some knowledge about the concepts in the input. Examples:
+
+Input: Sophie discovers a box of old photographs in her grandmother's basement. Fascinated, she spends the afternoon looking through them. Among the photos, she finds several of a young woman she doesn't recognize. Sophie decides to ask her grandmother about the woman.
+Knowledge: Basements are often used as storage spaces in houses, providing a cool and dry place for items not frequently used.
+
+Input: Evan plants a small vegetable garden in his backyard. He carefully selects a variety of seeds: tomatoes, carrots, and lettuce. Every day, he waters them and checks for any signs of growth. After a few weeks, sprouts begin to appear.
+Knowledge: Tomatoes are botanically classified as fruits because they contain seeds and develop from the flowering part of plants.
+
+Input: Liam finds a stray kitten hiding under his car one evening. He gently coaxes it out with some food and water. Realizing it has no collar, he decides to take it home temporarily. The next day, Liam posts found kitten notices around his neighborhood.
+Knowledge: Cats have been domesticated for nearly 4,000 years, with ancient Egyptians being among the first to tame them.
+
+Input: Nina signs up for a pottery class to learn a new hobby. At first, she struggles with the wheel, finding it harder than it looks. With persistence and practice, she starts to improve. By the end of the course, she has made a small, but beautiful, vase.
+Knowledge: The pottery wheel, a key tool in creating round ceramic pieces, dates back to around 4,500 BCE in the Near East.
+
+Input: During a walk in the park, Carla notices a peculiar bird with vibrant plumage. Intrigued, she takes several photos and later searches online to identify it. She discovers it's a rare species thought to be locally extinct. Excited, Carla shares her findings with a local birdwatching group.
+Knowledge: Birdwatching, or birding, is a hobby that involves observing birds in their natural habitat and is considered one of the fastest-growing hobbies in the world.
+
+Input: {question}
+Knowledge: 
+
