@@ -1,0 +1,28 @@
+Generate an alternative incorrect ending, for the given story. Examples:
+
+Rick grew up in a troubled household. He never found good support in family, and turned to gangs. It wasn't long before Rick got shot in a robbery. The incident caused him to turn a new leaf.
+Correct Ending: He is happy now.
+Incorrect Ending: He joined a gang.
+
+It was  my final performance in marching band. I was playing the snare drum in the band. We played Thriller and Radar Love. The performance was flawless.
+Correct Ending: I was very proud of my performance.
+Incorrect Ending: I was very ashamed of my performance.
+
+John and Billy became very skilled at beer pong. They entered a contest in college. They won the contest and advanced to the next level. The next level sent them to Vegas.
+Correct Ending: In Vegas, John and Billy competed against eighty contestants.
+Incorrect Ending: John and Billy were disappointed.
+
+Eddie and Angela hadn't been talking to each other for a long time. They lived in their house together like strangers. Finally, they sat down and agreed, it was time for a divorce. Eddie went to the courthouse and filed the paperwork.
+Correct Ending: They were divorced a few months later.
+Incorrect Ending: They fell back in love and stayed together forever.
+
+Linda began to have problems with a coworker at her job. The coworker had started bossing her around at work. The coworker even talked behind her back. Linda went to her boss with the issue and the boss mediated them.
+Correct Ending: Linda and the coworker ended up being best friends.
+Incorrect Ending: Her boss fired her the next day.
+
+{Story}
+Correct Ending: {CorrectE}
+Incorrect Ending: 
+
+
+
