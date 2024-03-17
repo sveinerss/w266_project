@@ -1,0 +1,37 @@
+% !TEX root = paper.tex
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % Adjust document margins
+\usepackage{lipsum} % Dummy text
+\usepackage{multicol} % Multi-column layout for the body
+\usepackage[hidelinks]{hyperref}
+
+
+\title{Knowledge and Story Comprehension}
+\author{Eduardo Badillo\thanks{UC Berkeley, Email: eduardo.badillo@berkeley.edu} \and Geronimo Walker\thanks{UC Berkeley, Email: 
+geronimowalker@ischool.berkeley.edu} \and   Svein Gonzalez\thanks{UC Berkeley, Email: 
+sggonzal@ischool.berkeley.edu}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent % Align the abstract with the document's margin
+It has been demonstrated that pre-trained language models have a good performance on numeric, and common-sense reasoning tasks with little or no fine-tunning needed. This performance is further enhanced when more context or knowledge of the input is provided to the model at the moment of inference; for it enables the model to leverage the knowledge it already contains from its pretraining and use it more effectively on downstream tasks. In this paper we study the impact of incorporating additional knowledge, with different structures and retrieval techniques, on tasks that require both reasoning and comprehension (ClozeStory Dataset) to determine a correct ending of a story. Our code is available at \href{https://github.com/sveinerss/w266_project}{Github}.
+\end{abstract}
+
+\begin{multicols}{2}
+\section{Introduction}
+There are two main ways in which task performance can be enhanced in pre-trained language models, by incorporating knowledge and by fine-tunning. The latter has shown that larger and larger models with fine-tunning diminish the need to integrate auxiliary knowledge (Khashabi et al., 2020; Lourie et al., 2021). Yet, incorporating knowledge on top of large-scale models (Liu et al. 2022) has shown a marked improvement on performance when no fine-tunning is involved. Suggesting that the models are able to exploit more effectively their pre-training knowledge when additional task-relevant information is provided. 
+
+Obtaining and encoding relevant, contextual information isn't trivial. There might not be enough quality data for the task, and the way it is retrieved from the external knowledge structure and paired with the relevant keywords or entities in each sample must be also be thought of. 
+The methods we will be using are knowledge graphs (Aglionbi et al. 2022) and knowledge prompting (Liu et al. 2022). We will add the relevant knowledge contained in each on top of pre-trained models, without fine-tunning to test whether their inclusion amounts to an increased performance on the story comprehension task. These approaches have been used on common-sense, numeric reasoning tasks where the query or question is configured in a syllogistic manner. But its usefulness on comprehension datasets, where samples have no straightforward outcomes, has yet to be tested. As baseline we will be using the models without knowledge structures, and standalone models (models without pre-training). 
+
+\section{Prompt-based Knowledge}
+\lipsum[3-4]
+% Continue with the rest of your document
+\end{multicols}
+
+\end{document}
+
