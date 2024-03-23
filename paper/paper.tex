@@ -30,6 +30,23 @@ The methods we will be using are knowledge graphs (Aglionbi et al. 2022) and kno
 
 \section{Prompt-based Knowledge}
 \lipsum[3-4]
+
+\section{Triples}
+Triples are dependency representations of sentences. For example, take the sentence “ INSERT SENTENCE HERE“. Using Spacy, we can generate triples, 
+most commonly Subject DASH Verb DASH Object (SVOs), to represent the sentence with the most relevant context and information. Drawing inspiration from 
+INSERT HERE, where graph representations of possible answers to questions are used to determine the highest ranking answer, our model will use 
+extracted triples from the sentences comprising a story and compute a cosine similarity between the triples and two possible endings. Extracted 
+triples are initially captured by a simple approach, speech tagging identification. Using SPACY and the *INSERT HERE UNDERLYING TRAINING*, we 
+parse through all our sentences capturing words that are labeled *INSERT HERE EXACT* into our SVO triples. As noted in *INSERT HERE*, certain 
+words such as *INSERT HERE* are stronger central nodes than others since they share more dependencies.  This will be important to improve upon 
+to optimally capture significant SVOs.
+
+First, model generated to predict the proper ending uses inference. By generating four triples, one for each story sentence, we pass through the 
+a bert model to generate pooled outputs. We then compute pooled outputs of each full ending and compute cosine similarity for each. This first 
+attempt didnAPOSTt result in remarkable roasting, only presenting a 50 percent accuracy DASH no better than a coinflip.
+
+However, the next models will investigate triples with better selection and ordering of the triples. Currently, all triples are weighed evenly 
+and cosines are averaged *INSERT IMAGE HERE*. The next model iteration will note the ending triples of the story more using a BertSeqtoSeq model. 
 % Continue with the rest of your document
 \end{multicols}
 
