@@ -4,6 +4,11 @@
 \usepackage{lipsum} % Dummy text
 \usepackage{multicol} % Multi-column layout for the body
 \usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{float}
+\graphicspath{ {../images/} }
 
 
 \title{Knowledge and Story Comprehension}
@@ -36,9 +41,35 @@ Triples are dependency representations of sentences. For example, take the sente
 most commonly Subject DASH Verb DASH Object (SVOs), to represent the sentence with the most relevant context and information. Drawing inspiration from 
 INSERT HERE, where graph representations of possible answers to questions are used to determine the highest ranking answer, our model will use 
 extracted triples from the sentences comprising a story and compute a cosine similarity between the triples and two possible endings. Extracted 
-triples are initially captured by a simple approach, speech tagging identification. Using SPACY and the *INSERT HERE UNDERLYING TRAINING*, we 
-parse through all our sentences capturing words that are labeled *INSERT HERE EXACT* into our SVO triples. As noted in *INSERT HERE*, certain 
-words such as *INSERT HERE* are stronger central nodes than others since they share more dependencies.  This will be important to improve upon 
+triples are initially captured by a simple approach, speech tagging identification. 
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{spacy.png}
+%     \caption{Spacy Dependency of "The dog can walk"}
+%     \label{fig:dependency tree}
+% \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node at (0,0) {\includegraphics[width=8cm]{spacy.png}};
+    \end{tikzpicture}
+    \caption{Spacy Dependency Example}
+\end{figure}
+
+% \makebox[0pt][l]{%
+% \begin{minipage}{\textwidth}
+% \centering
+%     \includegraphics[width=.8\textwidth]{spacy.png}
+%  \captionof{figure}{Spacy Dependency of a Story Sentence}
+%  \label{fig:Spacy Dependency Example }
+% \end{minipage}
+% }
+
+Using SPACY and the *INSERT HERE UNDERLYING TRAINING*, we parse through all our sentences capturing words that are labeled *INSERT HERE EXACT* 
+into our SVO triples. As noted in *INSERT HERE*, certain words such as *INSERT HERE* are stronger central nodes than others since they share more
+dependencies.  This will be important to improve upon 
 to optimally capture significant SVOs.
 
 First, model generated to predict the proper ending uses inference. By generating four triples, one for each story sentence, we pass through the 
@@ -48,6 +79,9 @@ attempt didnAPOSTt result in remarkable roasting, only presenting a 50 percent a
 However, the next models will investigate triples with better selection and ordering of the triples. Currently, all triples are weighed evenly 
 and cosines are averaged *INSERT IMAGE HERE*. The next model iteration will note the ending triples of the story more using a BertSeqtoSeq model. 
 % Continue with the rest of your document
+
+
+
 \end{multicols}
 
 \end{document}
