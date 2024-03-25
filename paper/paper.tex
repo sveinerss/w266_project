@@ -8,6 +8,8 @@
 \usepackage{caption}
 \usepackage{tikz}
 \usepackage{float}
+\usepackage{booktabs}
+\usepackage{amsthm}
 \usepackage [english]{babel}
 \usepackage [autostyle, english = american]{csquotes}
 
@@ -44,7 +46,76 @@ Each sample in the Story Cloze dataset comprises four distinct sentences alongsi
 To process the dataset for traning and inference our procedure involved concatenating each set of four input sentences into a cohesive paragraph, followed by duplicating each paragraph and appending both the correct and incorrect endings. This resulted in two stories—one with a valid conclusion, and the other an invalid conclusion. We conducted our training with Bert for Sequence Classification and Bert for Multiple Choice, both equipped with a standard 12-layer architecture and a classification head. 
 
 \section{Prompt-based Knowledge}
-\lipsum[3-4]
+The knowledge produced with this approach relies in the GPT3.5 turbo model. To generate context relevant facts for a given story five sample stories (manually written by us), each with a context-relevant fact, were issued in the same prompt to provide the model guidance on what to focus on in a story and how the contextual facts should be generated. Once the gpt model read the new story, it would produce a fact about some aspect of it in such a way that resembled the provided examples. 
+
+\newtheorem{example}{Example}
+
+
+\begin{example}
+
+Input: During a walk in the park, Carla notices a peculiar bird with vibrant plumage. Intrigued, she takes several photos and later searches online to identify it. She discovers it's a rare species thought to be locally extinct. Excited, Carla shares her findings with a local birdwatching group.
+
+
+Knowledge: Birdwatching, or birding, is a hobby that involves observing birds in their natural habitat and is considered one of the fastest-growing hobbies in the world.
+    
+\end{example}
+
+We applied this generative process to all samples in the validation set (1,571 stories).
+
+Once all stories had an associated relevant fact, we conducted an ablation study to test the impact of its incorporation during the inference phase. 
+
+\vspace{0.2cm}
+\begin{tabular}{lcc}
+\toprule
+Model & Accuracy (\%) \\
+\midrule
+Bert & 47.2 \\
+Bert w/Knowledge & 51.6 \\
+T5 & 54.5 \\
+T5 w/Knowledge & 56.2 \\
+\bottomrule
+\end{tabular}
+\vspace{0.3cm}
+
+Even when we see a slight performance increase across all models tested when including knowledge, the results are still not much better than random guessing. We will experiment with the inclusion of knowledge after fine-tuning the models (TO DO). We continue studying the output probabilities for both approaches to see whether the inclusion of knowledge makes the model more certain of its predictions. 
+
+
+We use two metrics to measure confidence about predictions, Shannon's Entropy Coefficient and the Gini Coefficient. For each sample, the Shannon entropy \(H\) is calculated as follows:
+\[
+H(p_A, p_B) = -\left( p_A \log_2(p_A) + p_B \log_2(p_B) \right)
+\]
+where:
+\begin{itemize}
+    \item \(p_A\) is the probability of the correct class for the sample.
+    \item \(p_B\) is the probability of the incorrect class for the sample.
+\end{itemize}
+
+% Mean Entropy Calculation
+To calculate the mean entropy across all \(N\) samples in the dataset:
+\[
+\overline{H} = \frac{1}{N} \sum_{i=1}^{N} H(p_{A_i}, p_{B_i})
+\]
+where:
+\begin{itemize}
+    \item \(N\) is the total number of samples in the dataset,
+    \item \(H(p_{A_i}, p_{B_i})\) is the entropy of the \(i\)-th sample, calculated as per the formula above.
+\end{itemize}
+
+A higher entropy value for a sample indicates that the model's prediction probabilities for that instance are more evenly spread out across both candidates, suggesting uncertainty. Lower entropy indicates higher certainty, one class has a significantly bigger probability than the other, suggesting that the model is more confident in its prediction. We compute the mean as a proxy metric to represent the entropy of the entire validation dataset.
+
+\vspace{0.2cm}
+\begin{tabular}{lcc}
+\toprule
+Model & Entropy & Gini\\
+\midrule
+Bert  & 0.999 & 0.4995 \\
+Bert w/Knowledge & 0.997 & 0.4985 \\
+\bottomrule
+\end{tabular}
+\vspace{0.3cm}
+
+Even when we observe an improvement in the accuracy metric, when we take a look at the actual probability distributions it seems that the model didn't benefited from the inclusion of knowledge in a case to case basis. For both classes the model is almost equally as likely to favor one class as the other, which we can infer from the high entropies in both experiments. We will include the knowledge during the fine-tuning process to see if during training the additional knowledge is able to be leveraged more effectively (TO DO).
+
 
 \section{Triples}
 Triples are dependency representations of sentences. For example, take the sentence ``David noticed he had put on a lot of weight recently'', using Spacy, we can generate triples, 
