@@ -8,6 +8,9 @@
 \usepackage{caption}
 \usepackage{tikz}
 \usepackage{float}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+
 \graphicspath{ {../images/} }
 
 
@@ -37,7 +40,7 @@ The methods we will be using are knowledge graphs (Aglionbi et al. 2022) and kno
 \lipsum[3-4]
 
 \section{Triples}
-Triples are dependency representations of sentences. For example, take the sentence “David noticed he had put on a lot of weight recently", using Spacy, we can generate triples, 
+Triples are dependency representations of sentences. For example, take the sentence ``David noticed he had put on a lot of weight recently'', using Spacy, we can generate triples, 
 most commonly Subject-Verb-Object (SVOs), to represent the sentence with the most relevant context and information. Drawing inspiration from 
 Aglinoby and Teugel (2022), where graph representations of possible answers to questions are used to determine the highest ranking answer, our model will use 
 extracted triples from the sentences comprising a story and compute a cosine similarity between the triples and two possible endings. Extracted 
@@ -51,9 +54,9 @@ triples are initially captured by a simple approach, speech tagging identificati
     \caption{Spacy Dependency Example}
 \end{figure}
 
-Using SPACY, we parse through all our sentences capturing words that are labeled "ROOT" (for verb), "nsubj" (for subject), or "dobj"/"pobj" (for object) 
-into our SVO triples. It is important to note that "ROOT" can be a successful tag for verbs, but isn't a guarantee. As noted in Figure 1, certain words 
-such as "put" are stronger central nodes than others since they share more dependencies.  This will be important to improve upon to optimally capture 
+Using SPACY, we parse through all our sentences capturing words that are labeled ``ROOT" (for verb), ``nsubj" (for subject), or ``dobj"/``pobj" (for object) 
+into our SVO triples. It is important to note that ``ROOT" can be a successful tag for verbs, but isn't a guarantee. As noted in Figure 1, certain words 
+such as ``put" are stronger central nodes than others since they share more dependencies.  This will be important to improve upon to optimally capture 
 significant SVOs.
 
 After generating SVOs, one for each story sentence, we use a bert model to generate cosine similarities for our different endings. We do so by
