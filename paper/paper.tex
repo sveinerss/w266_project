@@ -52,12 +52,14 @@ triples are initially captured by a simple approach, speech tagging identificati
 \end{figure}
 
 Using SPACY, we parse through all our sentences capturing words that are labeled "ROOT" (for verb), "nsubj" (for subject), or "dobj"/"pobj" (for object) 
-into our SVO triples. As noted in Figure 1, certain words such as "put" are stronger central nodes than others since they share more
-dependencies.  This will be important to improve upon to optimally capture significant SVOs.
+into our SVO triples. It is important to note that "ROOT" can be a successful tag for verbs, but isn't a guarantee. As noted in Figure 1, certain words 
+such as "put" are stronger central nodes than others since they share more dependencies.  This will be important to improve upon to optimally capture 
+significant SVOs.
 
-First, model generated to predict the proper ending uses inference. After generating a triple, one for each story sentence, we pass them through a
-a bert model to generate pooled outputs. We then compute pooled outputs of each full ending and compute cosine similarity for each. This first 
-attempt didn't produce remarkable results, only presenting a 50 percent accuracy.
+After generating SVOs, one for each story sentence, we use a bert model to generate cosine similarities for our different endings. We do so by
+tokenizing our SVOs then running them through a bert model to obtain a mean pooled output for each triple. The story endings are treated the same.
+Next we compute a cosine similarity between all the story sentences and the two possible endings (Figure 2). The initial attempt to use triples hasn't yieled
+ remarkable results, only presenting a 50 percent accuracy.
 
 \begin{figure}[H]
     \centering
@@ -69,9 +71,6 @@ attempt didn't produce remarkable results, only presenting a 50 percent accuracy
 
 However, the next models will investigate triples with better selection and ordering of the triples. Currently, all triples are weighed evenly 
 when the cosines are averaged (Figure 2). The next model iteration will note the ending triples of the story more using a BertSeqtoSeq model. 
-
-
-
 
 \end{multicols}
 
