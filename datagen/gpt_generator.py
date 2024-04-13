@@ -17,6 +17,7 @@ def saveContents(arr: list, output_path:str):
 
 def request(
     prompt: str,
+    client=None,
     model="gpt-3.5-turbo",
     max_tokens=60,
     temperature=1.0,
@@ -30,28 +31,33 @@ def request(
     Queries the gpt model to create relevant, contextual and factual information given the input. 
     '''
     # retry request (handles connection errors, timeouts, and overloaded API)
+    if client is not None:
+        while True:
+            try:
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[prompt],
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    top_p=top_p,
+                    n=n,
+                    stop=stop,
+                    presence_penalty=presence_penalty,
+                    frequency_penalty=frequency_penalty,
+                )
+                break
+            except Exception as e:
+                tqdm.write(str(e))
+                tqdm.write("Retrying...")
+                import time
+                time.sleep(60)
+
+        return response.choices[0].message.content
+    else:
+        print("No client passed. Skipping.")
+        return None
     
-    while True:
-        try:
-            response = client.chat.completions.create(
-                model=model,
-                messages=[prompt],
-                max_tokens=max_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                n=n,
-                stop=stop,
-                presence_penalty=presence_penalty,
-                frequency_penalty=frequency_penalty,
-            )
-            break
-        except Exception as e:
-            tqdm.write(str(e))
-            tqdm.write("Retrying...")
-            import time
-            time.sleep(60)
     
-    return response.choices[0].message.content
 
 
 @click.command()
@@ -97,6 +103,7 @@ def main(
 
             incorrectEnding = request(
                 prompt_to_pass,
+                client=client,
                 n=num_knowledge,
                 top_p=top_p,
                 temperature=temperature,
