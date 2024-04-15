@@ -1,0 +1,52 @@
+% !TEX root = paper.tex
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % Adjust document margins
+\usepackage{lipsum} % Dummy text
+\usepackage{multicol} % Multi-column layout for the body
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+
+\graphicspath{ {../images/} }
+
+
+\title{Knowledge and Story Comprehension}
+\author{Eduardo Badillo\thanks{UC Berkeley, Email: eduardo.badillo@berkeley.edu} \and Geronimo Walker\thanks{UC Berkeley, Email: 
+geronimowalker@ischool.berkeley.edu} \and   Svein Gonzalez\thanks{UC Berkeley, Email: 
+sggonzal@ischool.berkeley.edu}}
+\date{\today} 
+
+\begin{document}
+
+\maketitle
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccc}
+    \hline
+    \multirow{2}{*}{Model} & \multicolumn{2}{c}{Alternate Story Endings} & \multicolumn{2}{c}{GPT Story Endings} \\
+    & Accuracy & Recall & Accuracy & Recall \\
+    \hline
+    Baseline Inference & 82.5 & NA & 68.55 & NA \\
+    Inference w/ knowledge & 90.38 & NA & 61.92 & NA \\
+    Triple Inference & 71.63 & NA & 66.80 & NA \\
+    \hline
+    Fine-tune Seq2Seq & 96.96 & 97.11 & 49.41 & 100 \\
+    Knowledge Seq2Seq & NA & NA & 50.15 & 100 \\
+    Triple Seq2Seq & 94.50 & 94.21 & 80.33 & 81.82 \\
+    
+    \end{tabular}
+    \caption{Model performance for Alternate Story Endings and GPT Story Endings.}
+    \label{tab:model_performance}
+    \end{table}
+    
+\end{document}
+
